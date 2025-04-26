@@ -1,0 +1,20 @@
+[package]
+name = "game-session"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+gstd = { workspace = true }
+game-session-io = { workspace = true }
+wordle-io = { workspace = true }
+
+[build-dependencies]
+gear-wasm-builder = { workspace = true }
+game-session-io = { workspace = true }
+wordle-io = { workspace = true }
+
+[dev-dependencies]
+gtest = { workspace = true }
+game-session-io = { workspace = true }
+wordle-io = { workspace = true }

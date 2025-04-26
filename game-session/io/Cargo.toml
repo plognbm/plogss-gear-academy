@@ -1,0 +1,12 @@
+[package]
+name = "game-session-io"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+gstd = { workspace = true }
+gmeta = { workspace = true }
+parity-scale-codec = { workspace = true }
+scale-info = { workspace = true }
+wordle-io = { workspace = true }
