@@ -53,11 +53,10 @@ fn test_check_word() {
     wordle_program.send_bytes(USER, []);
     system.run_next_block();
 
-
     game_session_program.send(USER, wordle_program.id());
     system.run_next_block();
 
-    game_session_program.send(USER,SessionAction::StartGame);
+    game_session_program.send(USER, SessionAction::StartGame);
     system.run_next_block();
 
     // Check word
@@ -70,7 +69,9 @@ fn test_check_word() {
     system.run_next_block();
 
     // Check game state
-    let state: State = game_session_program.read_state("").expect("Failed to read state");
+    let state: State = game_session_program
+        .read_state("")
+        .expect("Failed to read state");
     assert_eq!(state.user_to_session[0].1.check_count, 1);
     assert_eq!(
         state.user_to_session[0].1.status,
@@ -97,7 +98,7 @@ fn test_game_timeout() {
     game_session_program.send(USER, wordle_program.id());
     system.run_next_block();
 
-    game_session_program.send(USER,SessionAction::StartGame);
+    game_session_program.send(USER, SessionAction::StartGame);
     system.run_next_block();
 
     // Advance time by 11 minutes
@@ -108,7 +109,9 @@ fn test_game_timeout() {
     system.run_next_block();
 
     // Check game state
-    let state: State = game_session_program.read_state("").expect("Failed to read state");
+    let state: State = game_session_program
+        .read_state("")
+        .expect("Failed to read state");
     assert_eq!(state.user_to_session[0].1.result, SessionResult::Lose);
 }
 
@@ -131,7 +134,7 @@ fn test_game_win() {
     game_session_program.send(USER, wordle_program.id());
     system.run_next_block();
 
-    game_session_program.send(USER,SessionAction::StartGame);
+    game_session_program.send(USER, SessionAction::StartGame);
     system.run_next_block();
 
     // Check word (assuming the secret word is "house")
@@ -160,7 +163,9 @@ fn test_game_win() {
     system.run_next_block();
 
     // Check game state
-    let state: State = game_session_program.read_state("").expect("Failed to read state");
+    let state: State = game_session_program
+        .read_state("")
+        .expect("Failed to read state");
     assert_eq!(state.user_to_session[0].1.result, SessionResult::Win);
 }
 
@@ -183,7 +188,7 @@ fn test_game_lose() {
     game_session_program.send(USER, wordle_program.id());
     system.run_next_block();
 
-    game_session_program.send(USER,SessionAction::StartGame);
+    game_session_program.send(USER, SessionAction::StartGame);
     system.run_next_block();
 
     // Make 6 incorrect guesses
@@ -198,6 +203,8 @@ fn test_game_lose() {
     }
 
     // Check game state
-    let state: State = game_session_program.read_state("").expect("Failed to read state");
+    let state: State = game_session_program
+        .read_state("")
+        .expect("Failed to read state");
     assert_eq!(state.user_to_session[0].1.result, SessionResult::Lose);
 }
